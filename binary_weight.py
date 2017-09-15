@@ -125,7 +125,7 @@ def test():
     test_loss /= len(test_loader.dataset)
     print('Average loss:' , test_loss , 'Accuracy: ' , 100. * correct / len(test_loader.dataset))
 
-def binarization_wright(w):
+def binarization_weight(w):
     w_n = -(w < 0).type_as(w)
     w_p = (w > 0).type_as(w)
     w_ = w_p + w_n
@@ -148,5 +148,5 @@ for epoch in range(1, EPOCH + 1):
     print('output layer binarization : ' , ' Epoch = ' , epoch , '/' , EPOCH ,  'c = ' , c , 'Alpha_ = ' , Alpha_ , 'Alpha = ' , Alpha) 
     test()
 
-model.fc2.weight = binarization_wright(model.fc2.weight)
+model.fc2.weight = binarization_weight(model.fc2.weight)
 test()
